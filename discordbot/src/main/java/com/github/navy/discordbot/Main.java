@@ -14,6 +14,11 @@ public class Main {
 	
 	static JSONObject config;
 
+	/**
+	 * Starts the entire bot
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		System.out.println("Starting bot");
@@ -21,6 +26,7 @@ public class Main {
 		if(config == null) System.exit(0);
 		
 		Client client = new Client(config);
+		client.setUpListeners();
 		
 		//Console input for basic console commands
 		BufferedReader input = new BufferedReader (new InputStreamReader(System.in));
@@ -43,9 +49,11 @@ public class Main {
 			File file = new File("config.json");
 			@SuppressWarnings("resource")
 			BufferedReader reader = new BufferedReader(new FileReader(file));
+			
 			String rawFile = "", line;
 			while((line = reader.readLine()) != null) rawFile += line;
 			JSONObject obj = new JSONObject(rawFile);
+			
 			return obj;
 			
 		} catch(FileNotFoundException ex) {
