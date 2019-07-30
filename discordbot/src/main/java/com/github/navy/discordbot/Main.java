@@ -26,7 +26,7 @@ public class Main {
 		if(config == null) System.exit(0);
 		
 		Client client = new Client(config);
-		client.setUpListeners();
+		client.login();
 		
 		//Console input for basic console commands
 		BufferedReader input = new BufferedReader (new InputStreamReader(System.in));
