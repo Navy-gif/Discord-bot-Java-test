@@ -15,6 +15,10 @@ public class Ping extends Command {
 	
 	public void call(Message message) {
 		
+		if(message == null) {
+			System.out.println("Null message");
+			return;
+		}
 		TextChannel channel = message.getChannel();
 		if(channel.canYouWrite()) channel.sendMessage("Pong!");
 		
