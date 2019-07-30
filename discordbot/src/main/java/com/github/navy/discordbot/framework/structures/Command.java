@@ -7,7 +7,7 @@ public class Command {
 	
 	String name, type;
 	
-	Command(String name, String type) {
+	protected Command(String name, String type) {
 	
 		this.name = name;
 		this.type = type;
