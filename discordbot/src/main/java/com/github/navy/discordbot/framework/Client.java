@@ -14,6 +14,7 @@ public class Client {
 	DiscordApi api;
 	Handler message_handler;
 	JSONObject config;
+	Registry registry;
 
 	public Client(JSONObject config) {
 		
@@ -22,7 +23,7 @@ public class Client {
 		preLogin = new DiscordApiBuilder().setToken(config.getString("token"));//.login().join();
 		setUpHandlers();
 		setUpListeners();
-		
+		registry = new Registry();
 		
 	}
 	
