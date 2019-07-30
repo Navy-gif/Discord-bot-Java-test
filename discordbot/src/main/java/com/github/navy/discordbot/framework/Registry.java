@@ -17,7 +17,7 @@ public class Registry {
 	
 	public Registry() {
 		
-		System.out.println("Loading registry.");
+		System.out.println("Loading command registry.");
 		commands = new HashMap<String, Command>();
 		loadCommands();
 		
