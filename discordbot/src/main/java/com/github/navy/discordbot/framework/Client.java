@@ -53,7 +53,7 @@ public class Client {
 	}
 
 	public void addGuildData(Server server) {
-		DataStore.put(String.valueOf(server.getId()), new GuildData(server));
+		DataStore.put(server.getIdAsString(), new GuildData(server));
 	}
 
 	public GuildData getGuildData(String id) {
