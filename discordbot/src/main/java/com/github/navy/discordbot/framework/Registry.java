@@ -13,7 +13,7 @@ import com.github.navy.discordbot.framework.structures.Command;
 
 public class Registry {
 	
-	Map<String, Command> commands;
+	public Map<String, Command> commands;
 	
 	public Registry() {
 		
@@ -44,7 +44,7 @@ public class Registry {
 				Constructor<?> constructor = clazz.getConstructor(); //Class constructor
 				Command cmd = (Command) constructor.newInstance(); //Command instance object
 				//cmd.call(null);
-				
+
 				this.commands.put(cmd.name, cmd);
 				
 				//System.out.println(loader);
@@ -75,5 +75,4 @@ public class Registry {
 		}
 		
 	}
-
 }

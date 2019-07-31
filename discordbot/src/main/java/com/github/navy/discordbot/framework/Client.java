@@ -21,10 +21,10 @@ public class Client {
 		this.config = config;
 		System.out.println("Initiating client");
 		preLogin = new DiscordApiBuilder().setToken(config.getString("token"));//.login().join();
+		registry = new Registry();
 		setUpHandlers();
 		setUpListeners();
-		registry = new Registry();
-		
+
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class Client {
 		System.out.println("Setting up handlers.");
 		//TODO set up message handler, command handler etc
 		
-		message_handler = new MessageHandler();
+		message_handler = new MessageHandler(registry);
 		
 	}
 
