@@ -3,16 +3,13 @@ package com.github.navy.discordbot.framework;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 import org.javacord.api.entity.user.User;
-import org.javacord.api.listener.message.MessageCreateListener;
 import org.json.JSONObject;
 
-import com.github.navy.discordbot.framework.handlers.CommandHandler;
 
 public class Client {
 	
-	private DiscordApiBuilder preLogin;
+	public DiscordApiBuilder preLogin;
 	DiscordApi api;
-	CommandHandler command_handler;
 	JSONObject config;
 	public Registry registry;
 	public User client_user;
@@ -22,12 +19,13 @@ public class Client {
 		this.config = config;
 		System.out.println("Initiating client");
 		preLogin = new DiscordApiBuilder().setToken(config.getString("token"));//.login().join();
-		setUpHandlers();
-		setUpListeners();
 		registry = new Registry();
+		registry.loadCommands();
+		registry.loadHandlers(this);
+		//setUpListeners();
 		login();
 		client_user = this.api.getYourself();
-		command_handler.setPrefix();
+		registry.getHandler("command_handler").setPrefix();
 		
 	}
 	
@@ -42,23 +40,24 @@ public class Client {
 		
 	}
 	
-	private void setUpHandlers() {
-		
-		System.out.println("Setting up handlers.");
-		//TODO set up message handler, command handler etc
-		
-		command_handler = new CommandHandler(this);
-		
-	}
+//			Moved to registry
+//	private void setUpHandlers() {
+//		
+//		//System.out.println("Setting up handlers.");
+//		//TODO dynamic handler loading
+//		
+//		//command_handler = new CommandHandler(this);
+//		
+//	}
 
-	private void setUpListeners() {
-
-		System.out.println("Setting up listeners.");
-		//TODO set up listeners that connect the events to handlers
-		
-		preLogin.addMessageCreateListener((MessageCreateListener) command_handler.getListener());
-		
-	}
+//	private void setUpListeners() {
+//
+//		System.out.println("Setting up listeners.");
+//		//TODO dynamic listener loading
+//		
+//		//preLogin.addMessageCreateListener((MessageCreateListener) command_handler.getListener());
+//		
+//	}
 
 	public String getPrefix() {
 		return this.config.getString("prefix");

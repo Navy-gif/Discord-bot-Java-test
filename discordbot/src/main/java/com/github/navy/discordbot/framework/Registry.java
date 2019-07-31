@@ -10,16 +10,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.github.navy.discordbot.framework.structures.Command;
+import com.github.navy.discordbot.framework.structures.Handler;
+import com.github.navy.discordbot.framework.structures.HandlerInterface;
 
 public class Registry {
 	
 	private Map<String, Command> commands;
+	private Map<String, HandlerInterface> handlers;
 	
 	public Registry() {
 		
 		System.out.println("Loading command registry.");
 		commands = new HashMap<String, Command>();
-		loadCommands();
+		handlers = new HashMap<String, HandlerInterface>();
+		//loadCommands();
 		
 	}
 
@@ -27,7 +31,7 @@ public class Registry {
 	 * Dynamic command loading.
 	 * All command classes are loaded in, new ones can simply be created as long as they are within the commands package
 	 */
-	private void loadCommands() {
+	void loadCommands() {
 
 		//commands directory, all the command files are here
 		File commands_dir = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\github\\navy\\discordbot\\commands");
@@ -70,6 +74,49 @@ public class Registry {
 
 	public Command getCommand(String key) {
 		return this.commands.get(key);
+	}
+	
+	void loadHandlers(Client client) {
+		
+		File handlers_dir = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\github\\navy\\discordbot\\framework\\handlers");
+		
+		for(File handler : handlers_dir.listFiles()) {
+			//System.out.println(command.getName());
+			try {
+				ClassLoader loader = URLClassLoader.newInstance(
+						new URL[] {handler.toURI().toURL()},
+						getClass().getClassLoader()
+				);
+				
+				//The command class
+				Class<?> clazz = Class.forName("com.github.navy.discordbot.framework.handlers."+handler.getName().replace(".java",""), true, loader); 
+				Constructor<?> constructor = clazz.getConstructors()[0]; //Class constructor
+				Handler hndlr = (Handler) constructor.newInstance(client); //Handler instance object
+				
+				this.handlers.put(hndlr.name, hndlr);
+				
+				//System.out.println(loader);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}  catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public HandlerInterface getHandler(String key) {
+		return this.handlers.get(key);
 	}
 	
 }
