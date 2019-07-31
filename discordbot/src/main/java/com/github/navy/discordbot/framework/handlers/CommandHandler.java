@@ -96,6 +96,10 @@ public class CommandHandler extends Handler implements HandlerInterface {
 		
 		if(response == null) return;
 		
+		if(response.em) {
+			message.getChannel().sendMessage();
+		}
+		
 	}
 
 	private class onMessageCreateListener implements MessageCreateListener {
