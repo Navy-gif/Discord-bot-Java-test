@@ -74,7 +74,7 @@ public class CommandHandler extends Handler implements HandlerInterface {
 		Matcher matcher = pattern.matcher(content);
 		ArrayList<String> args_al = new ArrayList<String>();
 		
-		while(matcher.find()) args_al.add(matcher.group().replace("\"",""));
+		while(matcher.find()) args_al.add(matcher.group().replace("\"","").trim());
 		
 		String command_str = args_al.get(0);
 		args_al.remove(0);
@@ -89,7 +89,7 @@ public class CommandHandler extends Handler implements HandlerInterface {
 			return;
 		}
 		
-		command.call(message, args);
+		command.call(message, args, message.getChannel(), message.getServer(), client);
 		
 	}
 

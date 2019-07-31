@@ -9,7 +9,7 @@ import org.json.JSONObject;
 public class Client {
 	
 	public DiscordApiBuilder preLogin;
-	DiscordApi api;
+	public DiscordApi api;
 	JSONObject config;
 	public Registry registry;
 	public User client_user;
@@ -39,25 +39,6 @@ public class Client {
 		System.out.println("Logged in.");
 		
 	}
-	
-//			Moved to registry
-//	private void setUpHandlers() {
-//		
-//		//System.out.println("Setting up handlers.");
-//		//TODO dynamic handler loading
-//		
-//		//command_handler = new CommandHandler(this);
-//		
-//	}
-
-//	private void setUpListeners() {
-//
-//		System.out.println("Setting up listeners.");
-//		//TODO dynamic listener loading
-//		
-//		//preLogin.addMessageCreateListener((MessageCreateListener) command_handler.getListener());
-//		
-//	}
 
 	public String getPrefix() {
 		return this.config.getString("prefix");

@@ -48,6 +48,7 @@ public class Registry {
 				Constructor<?> constructor = clazz.getConstructor(); //Class constructor
 				Command cmd = (Command) constructor.newInstance(); //Command instance object
 				
+				//System.out.println(cmd.name);
 				this.commands.put(cmd.name, cmd);
 				
 				//System.out.println(loader);
