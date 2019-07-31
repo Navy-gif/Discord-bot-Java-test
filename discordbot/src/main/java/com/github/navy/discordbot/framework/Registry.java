@@ -36,7 +36,7 @@ public class Registry {
 		//commands directory, all the command files are here
 		File commands_dir = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\github\\navy\\discordbot\\commands");
 		for(File command : commands_dir.listFiles()) {
-			//System.out.println(command.getName());
+
 			try {
 				ClassLoader loader = URLClassLoader.newInstance(
 						new URL[] {command.toURI().toURL()},
@@ -48,7 +48,6 @@ public class Registry {
 				Constructor<?> constructor = clazz.getConstructor(); //Class constructor
 				Command cmd = (Command) constructor.newInstance(); //Command instance object
 				
-				//System.out.println(cmd.name);
 				this.commands.put(cmd.name, cmd);
 				
 				//System.out.println(loader);

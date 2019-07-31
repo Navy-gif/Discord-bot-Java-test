@@ -22,7 +22,7 @@ public class ServerData extends Command implements CommandInterface {
 
         GuildData guildData = client.getGuildData(String.valueOf(guild.getId()));
 
-        return new Response(String.format("ID: '%s' Name: '%s' OwnerID: '%s'", guildData.getGuildID(), guildData.getGuildName(), guildData.getGuildOwnerID()));
+        return new Response(String.format("ID: '%s' Name: '%s' OwnerID: '%s'", guildData.getGuildID(), guildData.getGuildOwnerID()));
 
     }
 }
