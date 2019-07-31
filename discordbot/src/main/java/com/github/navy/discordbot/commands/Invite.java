@@ -21,7 +21,7 @@ public class Invite extends Command implements CommandInterface {
 		
 	}
 	
-	public Response call(Message message, String[] args, TextChannel channel, Optional<Server> guild, Client client) {
+	public Response call(Message message, String[] args, TextChannel channel, Server guild, Client client) {
 		
 		if(args.length > 0) {
 			if(args[0].equals("admin") || args[0].equals("administrator")) {

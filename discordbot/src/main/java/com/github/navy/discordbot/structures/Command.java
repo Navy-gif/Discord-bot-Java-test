@@ -21,7 +21,7 @@ public class Command implements CommandInterface {
 		
 	}
 
-	public Response call(Message message, String[] args, TextChannel channel, Optional<Server> guild, Client client) {
+	public Response call(Message message, String[] args, TextChannel channel, Server guild, Client client) {
 
 		if(message == null) {
 			System.out.println("Null message in command superclass.");
