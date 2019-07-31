@@ -3,7 +3,7 @@ package com.github.navy.discordbot.framework.structures;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
 
-public class Command {
+public class Command implements CommandInterface {
 	
 	public String name;
 	public String type;
@@ -16,7 +16,7 @@ public class Command {
 		
 	}
 	
-	public void call(Message message) {
+	public void call(Message message, String[] args) {
 		
 		if(message == null) {
 			System.out.println("Null message in command superclass.");
