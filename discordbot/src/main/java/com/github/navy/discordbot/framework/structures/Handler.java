@@ -1,4 +1,4 @@
-package com.github.navy.discordbot.framework.handlers;
+package com.github.navy.discordbot.framework.structures;
 
 import org.javacord.api.event.Event;
 import org.javacord.api.listener.GloballyAttachableListener;
