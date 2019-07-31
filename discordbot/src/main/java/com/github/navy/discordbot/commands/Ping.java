@@ -8,6 +8,7 @@ import org.javacord.api.entity.server.Server;
 
 import com.github.navy.discordbot.framework.structures.Command;
 import com.github.navy.discordbot.framework.structures.CommandInterface;
+import com.github.navy.discordbot.framework.structures.Response;
 
 public class Ping extends Command implements CommandInterface {
 
@@ -17,9 +18,9 @@ public class Ping extends Command implements CommandInterface {
 		
 	}
 	
-	public void call(Message message, String[] args, TextChannel channel, Optional<Server> guild) {
+	public Response call(Message message, String[] args, TextChannel channel, Optional<Server> guild) {
 		
-		if(channel.canYouWrite()) channel.sendMessage("Pong!");
+		return new Response("Pong!");
 		
 	}
 

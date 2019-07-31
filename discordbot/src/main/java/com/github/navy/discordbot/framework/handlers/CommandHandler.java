@@ -15,6 +15,7 @@ import com.github.navy.discordbot.framework.Client;
 import com.github.navy.discordbot.framework.structures.Command;
 import com.github.navy.discordbot.framework.structures.Handler;
 import com.github.navy.discordbot.framework.structures.HandlerInterface;
+import com.github.navy.discordbot.framework.structures.Response;
 
 public class CommandHandler extends Handler implements HandlerInterface {
 	
@@ -31,7 +32,7 @@ public class CommandHandler extends Handler implements HandlerInterface {
 	
 	public void setPrefix() {
 		
-		prefixes = new String[] {client.getPrefix(), "<@"+client.client_user.getIdAsString()+">", "<@!"+client.client_user.getIdAsString()+">"};
+		prefixes = new String[] { client.getPrefix(), "<@"+client.client_user.getIdAsString()+">", "<@!"+client.client_user.getIdAsString()+">" };
 		
 	}
 
@@ -89,7 +90,9 @@ public class CommandHandler extends Handler implements HandlerInterface {
 			return;
 		}
 		
-		command.call(message, args, message.getChannel(), message.getServer(), client);
+		Response response = command.call(message, args, message.getChannel(), message.getServer(), client);
+		
+		if(response == null) return;
 		
 	}
 

@@ -21,14 +21,14 @@ public class Command implements CommandInterface {
 		
 	}
 
-	public void call(Message message, String[] args, TextChannel channel, Optional<Server> guild, Client client) {
+	public Response call(Message message, String[] args, TextChannel channel, Optional<Server> guild, Client client) {
 
 		if(message == null) {
 			System.out.println("Null message in command superclass.");
-			return;
+			return null;
 		}
 		
-		if(channel.canYouWrite()) channel.sendMessage("This command apparently doesn't have a response yet. :)");
+		return new Response("This command apparently doesn't have a response yet. :)");
 		
 	}
 

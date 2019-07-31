@@ -11,6 +11,7 @@ import org.javacord.api.entity.server.Server;
 import com.github.navy.discordbot.framework.Client;
 import com.github.navy.discordbot.framework.structures.Command;
 import com.github.navy.discordbot.framework.structures.CommandInterface;
+import com.github.navy.discordbot.framework.structures.Response;
 
 public class Invite extends Command implements CommandInterface {
 
@@ -20,15 +21,16 @@ public class Invite extends Command implements CommandInterface {
 		
 	}
 	
-	public void call(Message message, String[] args, TextChannel channel, Optional<Server> guild, Client client) {
+	public Response call(Message message, String[] args, TextChannel channel, Optional<Server> guild, Client client) {
 		
-		if(!channel.canYouWrite()) return;
 		if(args.length > 0) {
 			if(args[0].equals("admin") || args[0].equals("administrator")) {
-				channel.sendMessage("<" + client.api.createBotInvite((new PermissionsBuilder()).setAllowed(PermissionType.ADMINISTRATOR).build()) + ">");
+				return new Response("<" + client.api.createBotInvite((new PermissionsBuilder()).setAllowed(PermissionType.ADMINISTRATOR).build()) + ">");
 			}
+		} else {
+			return new Response("<" + client.api.createBotInvite() + ">");
 		}
-		else channel.sendMessage("<" + client.api.createBotInvite() + ">");
+		return null; //my IDE was screaming at me to add this
 		
 	}
 
