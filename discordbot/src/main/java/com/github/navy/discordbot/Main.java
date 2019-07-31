@@ -25,18 +25,18 @@ public class Main {
 		config = getConfig();
 		if(config == null) System.exit(0);
 		
+		@SuppressWarnings("unused")
 		Client client = new Client(config);
-		client.login();
+		//client.login();
 		
 		//Console input for basic console commands
-		BufferedReader input = new BufferedReader (new InputStreamReader(System.in));
+		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		try {
 			// TODO everything
 			String in;
 			while((in = input.readLine()) != null)
 			System.out.println(in);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

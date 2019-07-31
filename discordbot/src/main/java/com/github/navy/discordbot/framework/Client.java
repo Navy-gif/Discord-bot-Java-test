@@ -2,19 +2,20 @@ package com.github.navy.discordbot.framework;
 
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
+import org.javacord.api.entity.user.User;
 import org.javacord.api.listener.message.MessageCreateListener;
 import org.json.JSONObject;
 
-import com.github.navy.discordbot.framework.handlers.Handler;
 import com.github.navy.discordbot.framework.handlers.MessageHandler;
 
 public class Client {
 	
-	DiscordApiBuilder preLogin;
+	private DiscordApiBuilder preLogin;
 	DiscordApi api;
-	Handler message_handler;
+	MessageHandler message_handler;
 	JSONObject config;
-	Registry registry;
+	public Registry registry;
+	public User client_user;
 
 	public Client(JSONObject config) {
 		
@@ -24,6 +25,9 @@ public class Client {
 		setUpHandlers();
 		setUpListeners();
 		registry = new Registry();
+		login();
+		client_user = this.api.getYourself();
+		message_handler.setPrefix();
 		
 	}
 	
@@ -43,7 +47,7 @@ public class Client {
 		System.out.println("Setting up handlers.");
 		//TODO set up message handler, command handler etc
 		
-		message_handler = new MessageHandler();
+		message_handler = new MessageHandler(this);
 		
 	}
 
@@ -54,6 +58,10 @@ public class Client {
 		
 		preLogin.addMessageCreateListener((MessageCreateListener) message_handler.getListener());
 		
+	}
+
+	public String getPrefix() {
+		return this.config.getString("prefix");
 	}
 	
 }
