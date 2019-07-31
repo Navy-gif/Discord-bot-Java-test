@@ -12,10 +12,10 @@ import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 
 import com.github.navy.discordbot.framework.Client;
-import com.github.navy.discordbot.framework.structures.Command;
-import com.github.navy.discordbot.framework.structures.Handler;
-import com.github.navy.discordbot.framework.structures.HandlerInterface;
-import com.github.navy.discordbot.framework.structures.Response;
+import com.github.navy.discordbot.structures.Command;
+import com.github.navy.discordbot.structures.Handler;
+import com.github.navy.discordbot.structures.HandlerInterface;
+import com.github.navy.discordbot.structures.Response;
 
 public class CommandHandler extends Handler implements HandlerInterface {
 	

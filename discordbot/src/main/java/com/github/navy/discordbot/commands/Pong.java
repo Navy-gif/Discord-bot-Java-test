@@ -1,6 +1,6 @@
 package com.github.navy.discordbot.commands;
 
-import com.github.navy.discordbot.framework.structures.Command;
+import com.github.navy.discordbot.structures.Command;
 
 public class Pong extends Command {
 

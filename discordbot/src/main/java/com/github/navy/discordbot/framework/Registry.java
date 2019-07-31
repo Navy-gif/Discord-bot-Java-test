@@ -9,9 +9,9 @@ import java.net.URLClassLoader;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.navy.discordbot.framework.structures.Command;
-import com.github.navy.discordbot.framework.structures.Handler;
-import com.github.navy.discordbot.framework.structures.HandlerInterface;
+import com.github.navy.discordbot.structures.Command;
+import com.github.navy.discordbot.structures.Handler;
+import com.github.navy.discordbot.structures.HandlerInterface;
 
 public class Registry {
 	

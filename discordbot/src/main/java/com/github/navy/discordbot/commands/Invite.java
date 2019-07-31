@@ -9,9 +9,9 @@ import org.javacord.api.entity.permission.PermissionsBuilder;
 import org.javacord.api.entity.server.Server;
 
 import com.github.navy.discordbot.framework.Client;
-import com.github.navy.discordbot.framework.structures.Command;
-import com.github.navy.discordbot.framework.structures.CommandInterface;
-import com.github.navy.discordbot.framework.structures.Response;
+import com.github.navy.discordbot.structures.Command;
+import com.github.navy.discordbot.structures.CommandInterface;
+import com.github.navy.discordbot.structures.Response;
 
 public class Invite extends Command implements CommandInterface {
 

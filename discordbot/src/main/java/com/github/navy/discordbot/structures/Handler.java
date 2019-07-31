@@ -1,4 +1,4 @@
-package com.github.navy.discordbot.framework.structures;
+package com.github.navy.discordbot.structures;
 
 import org.javacord.api.event.Event;
 

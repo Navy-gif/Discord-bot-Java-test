@@ -1,8 +1,9 @@
 package com.github.navy.discordbot.framework.handlers;
 
 import com.github.navy.discordbot.framework.Client;
-import com.github.navy.discordbot.framework.structures.Handler;
-import com.github.navy.discordbot.framework.structures.HandlerInterface;
+import com.github.navy.discordbot.structures.Handler;
+import com.github.navy.discordbot.structures.HandlerInterface;
+
 import org.javacord.api.entity.server.Server;
 import org.javacord.api.event.Event;
 import org.javacord.api.event.server.ServerJoinEvent;
