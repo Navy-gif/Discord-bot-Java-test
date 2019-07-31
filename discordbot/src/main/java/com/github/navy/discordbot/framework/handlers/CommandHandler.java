@@ -14,19 +14,18 @@ import org.javacord.api.listener.message.MessageCreateListener;
 import com.github.navy.discordbot.framework.Client;
 import com.github.navy.discordbot.framework.structures.Command;
 import com.github.navy.discordbot.framework.structures.Handler;
+import com.github.navy.discordbot.framework.structures.HandlerInterface;
 
-public class CommandHandler implements Handler {
+public class CommandHandler extends Handler implements HandlerInterface {
 	
-	String name;
-	Client client;
 	boolean debug = true;
 	String[] prefixes;
 	
 	public CommandHandler(Client client) {
 		
-		this.client = client;
-		System.out.println("Initiating message handler.");
-		this.name = "command_handler";
+		super("command_handler", client);
+		System.out.println("Initiating command handler.");
+		setUpListener();
 		
 	}
 	
@@ -105,9 +104,15 @@ public class CommandHandler implements Handler {
 		
 	}
 
-	public MessageCreateListener getListener() {
-		
-		return new onMessageCreateListener();
+//	public MessageCreateListener getListener() {
+//		
+//		return new onMessageCreateListener();
+//		
+//	}
+
+	public void setUpListener() {
+
+		client.preLogin.addMessageCreateListener(new onMessageCreateListener());
 		
 	}
 
