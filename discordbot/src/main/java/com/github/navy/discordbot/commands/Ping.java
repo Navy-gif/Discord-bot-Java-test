@@ -4,8 +4,9 @@ import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
 
 import com.github.navy.discordbot.framework.structures.Command;
+import com.github.navy.discordbot.framework.structures.CommandInterface;
 
-public class Ping extends Command {
+public class Ping extends Command implements CommandInterface {
 
 	public Ping() {
 		
@@ -13,12 +14,8 @@ public class Ping extends Command {
 		
 	}
 	
-	public void call(Message message) {
+	public void call(Message message, String[] args) {
 		
-		if(message == null) {
-			System.out.println("Null message");
-			return;
-		}
 		TextChannel channel = message.getChannel();
 		if(channel.canYouWrite()) channel.sendMessage("Pong!");
 		
