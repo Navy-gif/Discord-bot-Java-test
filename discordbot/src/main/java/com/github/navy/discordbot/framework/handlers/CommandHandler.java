@@ -18,8 +18,8 @@ import com.github.navy.discordbot.framework.structures.HandlerInterface;
 
 public class CommandHandler extends Handler implements HandlerInterface {
 	
-	boolean debug = true;
-	String[] prefixes;
+	private boolean debug = true;
+	private String[] prefixes;
 	
 	public CommandHandler(Client client) {
 		
@@ -39,22 +39,22 @@ public class CommandHandler extends Handler implements HandlerInterface {
 	 * Command & arg parser
 	 * Takes in a Message event
 	 */
+	@Override
 	public void handle(Event event) {
 
-		if(debug) System.out.println("Message came through.");
+		if(debug) System.out.println("[Message] Message came through.");
 		Message message = ((CertainMessageEvent) event).getMessage();
 		if(message.getAuthor().isBotUser()) {
-			if(debug) System.out.println("User is bot.");
+			if(debug) System.out.println("[Message] User is bot.");
 			return;
 		}
 		String content = message.getContent().toLowerCase();
 		
 		if(content.length() == 0) {
-			if(debug) System.out.println("No message content.");
+			if(debug) System.out.println("[Message] No message content.");
 			return;
 		}
-		if(debug) System.out.println("Message content: " + content);
-		//message.addReaction("😂");
+		if(debug) System.out.println("[Message] Message content: " + content);
 		
 		boolean found_pre = false;
 		for(String prefix : prefixes) {
@@ -67,7 +67,7 @@ public class CommandHandler extends Handler implements HandlerInterface {
 		
 		if(!found_pre) return;
 		
-		if(debug) System.out.println("Content after prefix: " + content);
+		if(debug) System.out.println("[Message] Content after prefix: " + content);
 		
 		String reg = "(\"[^\"]*\"|[^\"\\s]+)(\\s+|$)(?i)";
 		Pattern pattern = Pattern.compile(reg);
@@ -79,13 +79,15 @@ public class CommandHandler extends Handler implements HandlerInterface {
 		String command_str = args_al.get(0);
 		args_al.remove(0);
 		String[] args = args_al.toArray(new String[args_al.size()]);
+
+		System.out.println(Arrays.toString(args));
 		
-		if(debug) System.out.println("Command: " + command_str + ", args: " + Arrays.toString(args));
+		if(debug) System.out.println("[Message] Command: " + command_str + ", args: " + Arrays.toString(args));
 		
 		Command command = client.registry.getCommand(command_str);
 		
 		if(command == null) {
-			if(debug) System.out.println("No command found for " + command_str);
+			if(debug) System.out.println("[Message] No command found for " + command_str);
 			return;
 		}
 		
@@ -95,9 +97,10 @@ public class CommandHandler extends Handler implements HandlerInterface {
 
 	private class onMessageCreateListener implements MessageCreateListener {
 
+		@Override
 		public void onMessageCreate(MessageCreateEvent event) {
 
-			if(debug) System.out.println("Should move to handler from here.");
+			if(debug) System.out.println("[Message] Should move to handler from here.");
 			handle(event);
 			
 		}
@@ -110,6 +113,7 @@ public class CommandHandler extends Handler implements HandlerInterface {
 //		
 //	}
 
+	@Override
 	public void setUpListener() {
 
 		client.preLogin.addMessageCreateListener(new onMessageCreateListener());
