@@ -13,7 +13,7 @@ import com.github.navy.discordbot.framework.structures.Command;
 
 public class Registry {
 	
-	Map<String, Command> commands;
+	private Map<String, Command> commands;
 	
 	public Registry() {
 		
@@ -43,37 +43,33 @@ public class Registry {
 				Class<?> clazz = Class.forName("com.github.navy.discordbot.commands."+command.getName().replace(".java",""), true, loader); 
 				Constructor<?> constructor = clazz.getConstructor(); //Class constructor
 				Command cmd = (Command) constructor.newInstance(); //Command instance object
-				//cmd.call(null);
 				
 				this.commands.put(cmd.name, cmd);
 				
 				//System.out.println(loader);
-			} catch (MalformedURLException ex) {
-				ex.printStackTrace();
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		
 	}
 
+	public Command getCommand(String key) {
+		return this.commands.get(key);
+	}
+	
 }
