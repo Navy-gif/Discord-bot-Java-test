@@ -6,13 +6,13 @@ import org.javacord.api.entity.user.User;
 import org.javacord.api.listener.message.MessageCreateListener;
 import org.json.JSONObject;
 
-import com.github.navy.discordbot.framework.handlers.MessageHandler;
+import com.github.navy.discordbot.framework.handlers.CommandHandler;
 
 public class Client {
 	
 	private DiscordApiBuilder preLogin;
 	DiscordApi api;
-	MessageHandler message_handler;
+	CommandHandler command_handler;
 	JSONObject config;
 	public Registry registry;
 	public User client_user;
@@ -27,7 +27,7 @@ public class Client {
 		registry = new Registry();
 		login();
 		client_user = this.api.getYourself();
-		message_handler.setPrefix();
+		command_handler.setPrefix();
 		
 	}
 	
@@ -47,7 +47,7 @@ public class Client {
 		System.out.println("Setting up handlers.");
 		//TODO set up message handler, command handler etc
 		
-		message_handler = new MessageHandler(this);
+		command_handler = new CommandHandler(this);
 		
 	}
 
@@ -56,7 +56,7 @@ public class Client {
 		System.out.println("Setting up listeners.");
 		//TODO set up listeners that connect the events to handlers
 		
-		preLogin.addMessageCreateListener((MessageCreateListener) message_handler.getListener());
+		preLogin.addMessageCreateListener((MessageCreateListener) command_handler.getListener());
 		
 	}
 
