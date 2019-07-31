@@ -12,6 +12,7 @@ import org.javacord.api.listener.server.ServerJoinListener;
 public class GuildHandler extends Handler implements HandlerInterface {
 
     private boolean debug = true;
+    private String debugPrefix = "[GuildHandler] ";
 
     public GuildHandler(Client client) {
 
@@ -24,7 +25,7 @@ public class GuildHandler extends Handler implements HandlerInterface {
     @Override
     public void handle(Event event) {
 
-        if(debug) System.out.println("[GuildJoin] Guild join came through.");
+        if(debug) System.out.println(debugPrefix + "Guild join came through.");
         Server server = ((ServerJoinEvent) event).getServer();
 
         client.addGuildData(server);
@@ -35,7 +36,7 @@ public class GuildHandler extends Handler implements HandlerInterface {
 
         public void onServerJoin(ServerJoinEvent event) {
 
-            if(debug) System.out.println("[GuildJoin] Should move to handler from here.");
+            if(debug) System.out.println(debugPrefix + "Should move to handler from here.");
             handle(event);
 
         }

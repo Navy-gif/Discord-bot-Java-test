@@ -22,6 +22,7 @@ import com.github.navy.discordbot.structures.Response;
 public class CommandHandler extends Handler implements HandlerInterface {
 	
 	private boolean debug = true;
+	private String debugPrefix = "[CMDHandler] ";
 	private String[] prefixes;
 	
 	public CommandHandler(Client client) {
@@ -45,12 +46,12 @@ public class CommandHandler extends Handler implements HandlerInterface {
 	@Override
 	public void handle(Event event) {
 
-		if(debug) System.out.println("[Message] Message came through.");
+		if(debug) System.out.println(debugPrefix + "Message came through.");
 		
 		Message message = ((CertainMessageEvent) event).getMessage();
 		
 		if(message.getAuthor().isBotUser()) {
-			if(debug) System.out.println("[Message] User is bot.");
+			if(debug) System.out.println(debugPrefix + "User is bot.");
 			return;
 		}
 		
@@ -59,11 +60,10 @@ public class CommandHandler extends Handler implements HandlerInterface {
 		Server guild = message.getServer().isPresent() ? message.getServer().get() : null;
 		
 		if(content.length() == 0) {
-			if(debug) System.out.println("[Message] No message content.");
+			if(debug) System.out.println(debugPrefix + "No message content.");
 			return;
 		}
-		
-		if(debug) System.out.println("[Message] Message content: " + content);
+		if(debug) System.out.println(debugPrefix +"Message content: " + content);
 		
 		boolean found_pre = false;
 		for(String prefix : prefixes) {
@@ -76,7 +76,7 @@ public class CommandHandler extends Handler implements HandlerInterface {
 		
 		if(!found_pre) return;
 		
-		if(debug) System.out.println("[Message] Content after prefix: " + content);
+		if(debug) System.out.println(debugPrefix + "Content after prefix: " + content);
 		
 		String reg = "(\"[^\"]*\"|[^\"\\s]+)(\\s+|$)(?i)";
 		Pattern pattern = Pattern.compile(reg);
@@ -89,14 +89,14 @@ public class CommandHandler extends Handler implements HandlerInterface {
 		args_al.remove(0);
 		String[] args = args_al.toArray(new String[args_al.size()]);
 
-		//System.out.println("[Message] args: " + Arrays.toString(args));
+		//System.out.println(Arrays.toString(args));
 		
-		if(debug) System.out.println("[Message] Command: " + command_str + ", args: " + Arrays.toString(args));
+		if(debug) System.out.println(debugPrefix + "Command: " + command_str + ", args: " + Arrays.toString(args));
 		
 		Command command = client.registry.getCommand(command_str);
 		
 		if(command == null) {
-			if(debug) System.out.println("[Message] No command found for " + command_str);
+			if(debug) System.out.println(debugPrefix + "No command found for " + command_str);
 			return;
 		}
 		
@@ -104,7 +104,7 @@ public class CommandHandler extends Handler implements HandlerInterface {
 		
 		if(response == null) return;
 		if(!channel.canYouWrite()) {
-			if(this.debug) System.out.println("Missing perms to send in channel."); 
+			if(this.debug) System.out.println(debugPrefix + "Missing perms to send in channel.");
 			return;
 		}
 		
@@ -118,18 +118,12 @@ public class CommandHandler extends Handler implements HandlerInterface {
 
 		public void onMessageCreate(MessageCreateEvent event) {
 
-			if(debug) System.out.println("[Message] Should move to handler from here.");
+			if(debug) System.out.println(debugPrefix + "Should move to handler from here.");
 			handle(event);
 			
 		}
 		
 	}
-
-//	public MessageCreateListener getListener() {
-//		
-//		return new onMessageCreateListener();
-//		
-//	}
 
 	@Override
 	public void setUpListener() {
