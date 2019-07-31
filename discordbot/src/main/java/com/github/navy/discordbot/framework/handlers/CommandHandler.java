@@ -100,7 +100,6 @@ public class CommandHandler extends Handler implements HandlerInterface {
 
 	private class onMessageCreateListener implements MessageCreateListener {
 
-		@Override
 		public void onMessageCreate(MessageCreateEvent event) {
 
 			if(debug) System.out.println("[Message] Should move to handler from here.");

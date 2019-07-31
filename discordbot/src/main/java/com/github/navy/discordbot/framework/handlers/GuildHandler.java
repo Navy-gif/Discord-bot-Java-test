@@ -30,7 +30,6 @@ public class GuildHandler extends Handler implements HandlerInterface {
 
     private class onServerJoinListener implements ServerJoinListener {
 
-        @Override
         public void onServerJoin(ServerJoinEvent event) {
 
             if(debug) System.out.println("[GuildJoin] Should move to handler from here.");
