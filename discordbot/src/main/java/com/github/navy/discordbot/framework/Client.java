@@ -19,13 +19,13 @@ public class Client {
 	JSONObject config;
 	public Registry registry;
 	public User client_user;
-	private Map<String, GuildData> guild_data;
+	private Map<String, GuildData> DataStore;
 
 	public Client(JSONObject config) {
 
 		System.out.println("Initiating client");
 		this.config = config;
-		guild_data = new HashMap<>();
+		DataStore = new HashMap<String, GuildData>();
 		preLogin = new DiscordApiBuilder().setToken(config.getString("token"));//.login().join();
 		registry = new Registry();
 		registry.loadCommands();
@@ -53,10 +53,10 @@ public class Client {
 	}
 
 	public void addGuildData(Server server) {
-		guild_data.put(String.valueOf(server.getId()), new GuildData(server));
+		DataStore.put(String.valueOf(server.getId()), new GuildData(server));
 	}
 
 	public GuildData getGuildData(String id) {
-		return guild_data.get(id);
+		return DataStore.get(id);
 	}
 }
