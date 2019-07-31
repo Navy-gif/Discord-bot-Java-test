@@ -18,7 +18,7 @@ public class Ping extends Command implements CommandInterface {
 		
 	}
 	
-	public Response call(Message message, String[] args, TextChannel channel, Optional<Server> guild) {
+	public Response call(Message message, String[] args, TextChannel channel, Server guild) {
 		
 		return new Response("Pong!");
 		

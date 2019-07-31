@@ -26,7 +26,9 @@ public class GuildHandler extends Handler implements HandlerInterface {
 
         if(debug) System.out.println("[GuildJoin] Guild join came through.");
         Server server = ((ServerJoinEvent) event).getServer();
-        System.out.println(server.getName());
+
+        client.addGuildData(server);
+
     }
 
     private class onServerJoinListener implements ServerJoinListener {

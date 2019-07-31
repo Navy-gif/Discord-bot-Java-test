@@ -1,10 +1,15 @@
 package com.github.navy.discordbot.framework;
 
 
+import com.github.navy.discordbot.structures.GuildData;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
+import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Client {
@@ -14,11 +19,13 @@ public class Client {
 	JSONObject config;
 	public Registry registry;
 	public User client_user;
+	private Map<String, GuildData> guild_data;
 
 	public Client(JSONObject config) {
 
 		System.out.println("Initiating client");
 		this.config = config;
+		guild_data = new HashMap<>();
 		preLogin = new DiscordApiBuilder().setToken(config.getString("token"));//.login().join();
 		registry = new Registry();
 		registry.loadCommands();
@@ -44,5 +51,12 @@ public class Client {
 	public String getPrefix() {
 		return this.config.getString("prefix");
 	}
-	
+
+	public void addGuildData(Server server) {
+		guild_data.put(String.valueOf(server.getId()), new GuildData(server));
+	}
+
+	public GuildData getGuildData(String id) {
+		return guild_data.get(id);
+	}
 }

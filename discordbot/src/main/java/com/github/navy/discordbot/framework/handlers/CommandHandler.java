@@ -92,7 +92,7 @@ public class CommandHandler extends Handler implements HandlerInterface {
 			return;
 		}
 		
-		Response response = command.call(message, args, message.getChannel(), message.getServer(), client);
+		Response response = command.call(message, args, message.getChannel(), message.getServer().isPresent() ? message.getServer().get() : null, client);
 		
 		if(response == null) return;
 		
