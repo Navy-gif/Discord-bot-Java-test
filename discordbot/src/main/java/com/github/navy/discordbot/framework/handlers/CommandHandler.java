@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
+import org.javacord.api.entity.server.Server;
 import org.javacord.api.event.Event;
 import org.javacord.api.event.message.CertainMessageEvent;
 import org.javacord.api.event.message.MessageCreateEvent;
@@ -44,12 +46,17 @@ public class CommandHandler extends Handler implements HandlerInterface {
 	public void handle(Event event) {
 
 		if(debug) System.out.println("[Message] Message came through.");
+		
 		Message message = ((CertainMessageEvent) event).getMessage();
+		
 		if(message.getAuthor().isBotUser()) {
 			if(debug) System.out.println("[Message] User is bot.");
 			return;
 		}
+		
 		String content = message.getContent().toLowerCase();
+		TextChannel channel = message.getChannel();
+		Server guild = message.getServer().isPresent() ? message.getServer().get() : null;
 		
 		if(content.length() == 0) {
 			if(debug) System.out.println("[Message] No message content.");
@@ -92,13 +99,17 @@ public class CommandHandler extends Handler implements HandlerInterface {
 			return;
 		}
 		
-		Response response = command.call(message, args, message.getChannel(), message.getServer().isPresent() ? message.getServer().get() : null, client);
+		Response response = command.call(message, args, channel, guild, client);
 		
 		if(response == null) return;
-		
-		if(response.em) {
-			message.getChannel().sendMessage();
+		if(!channel.canYouWrite()) {
+			if(this.debug) System.out.println("Missing perms to send in channel."); 
+			return;
 		}
+		
+		if(response.em) message.getChannel().sendMessage(response.embed);
+		else if(response.em && response.text != null) message.getChannel().sendMessage(response.text, response.embed);
+		else message.getChannel().sendMessage(response.text);
 		
 	}
 
