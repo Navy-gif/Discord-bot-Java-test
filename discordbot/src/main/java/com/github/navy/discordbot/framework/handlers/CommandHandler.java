@@ -13,19 +13,20 @@ import org.javacord.api.listener.message.MessageCreateListener;
 
 import com.github.navy.discordbot.framework.Client;
 import com.github.navy.discordbot.framework.structures.Command;
+import com.github.navy.discordbot.framework.structures.Handler;
 
-public class MessageHandler implements Handler {
+public class CommandHandler implements Handler {
 	
 	String name;
 	Client client;
 	boolean debug = true;
 	String[] prefixes;
 	
-	public MessageHandler(Client client) {
+	public CommandHandler(Client client) {
 		
 		this.client = client;
 		System.out.println("Initiating message handler.");
-		this.name = "message_handler";
+		this.name = "command_handler";
 		
 	}
 	
@@ -35,11 +36,19 @@ public class MessageHandler implements Handler {
 		
 	}
 
+	/**
+	 * Command & arg parser
+	 * Takes in a Message event
+	 */
 	public void handle(Event event) {
 
-		System.out.println("Message came through");
+		if(debug) System.out.println("Message came through.");
 		Message message = ((CertainMessageEvent) event).getMessage();
-		String content = message.getContent();
+		if(message.getAuthor().isBotUser()) {
+			if(debug) System.out.println("User is bot.");
+			return;
+		}
+		String content = message.getContent().toLowerCase();
 		
 		if(content.length() == 0) {
 			if(debug) System.out.println("No message content.");
@@ -52,7 +61,7 @@ public class MessageHandler implements Handler {
 		for(String prefix : prefixes) {
 			if(content.startsWith(prefix)) {
 				found_pre = true;
-				content = content.replace(prefix, "").trim();
+				content = content.replaceFirst(prefix, "").trim();
 				break;
 			}
 		}
@@ -89,7 +98,7 @@ public class MessageHandler implements Handler {
 
 		public void onMessageCreate(MessageCreateEvent event) {
 
-			System.out.println("Should move to handler from here.");
+			if(debug) System.out.println("Should move to handler from here.");
 			handle(event);
 			
 		}
