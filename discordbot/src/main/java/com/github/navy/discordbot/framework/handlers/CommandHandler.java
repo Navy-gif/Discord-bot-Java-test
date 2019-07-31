@@ -62,6 +62,7 @@ public class CommandHandler extends Handler implements HandlerInterface {
 			if(debug) System.out.println("[Message] No message content.");
 			return;
 		}
+		
 		if(debug) System.out.println("[Message] Message content: " + content);
 		
 		boolean found_pre = false;
@@ -88,7 +89,7 @@ public class CommandHandler extends Handler implements HandlerInterface {
 		args_al.remove(0);
 		String[] args = args_al.toArray(new String[args_al.size()]);
 
-		System.out.println(Arrays.toString(args));
+		//System.out.println("[Message] args: " + Arrays.toString(args));
 		
 		if(debug) System.out.println("[Message] Command: " + command_str + ", args: " + Arrays.toString(args));
 		
