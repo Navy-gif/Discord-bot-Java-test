@@ -1,5 +1,6 @@
 package com.github.navy.discordbot.framework;
 
+
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 import org.javacord.api.entity.user.User;
@@ -15,9 +16,9 @@ public class Client {
 	public User client_user;
 
 	public Client(JSONObject config) {
-		
-		this.config = config;
+
 		System.out.println("Initiating client");
+		this.config = config;
 		preLogin = new DiscordApiBuilder().setToken(config.getString("token"));//.login().join();
 		registry = new Registry();
 		registry.loadCommands();

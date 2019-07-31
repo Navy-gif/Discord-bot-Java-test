@@ -25,7 +25,7 @@ public class CommandHandler extends Handler implements HandlerInterface {
 	public CommandHandler(Client client) {
 		
 		super("command_handler", client);
-		System.out.println("Initiating command handler..");
+		System.out.println("Initiating command handler.");
 		setUpListener();
 		
 	}
