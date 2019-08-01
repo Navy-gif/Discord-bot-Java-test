@@ -9,6 +9,8 @@ import org.javacord.api.event.Event;
 import org.javacord.api.event.server.ServerJoinEvent;
 import org.javacord.api.listener.server.ServerJoinListener;
 
+import java.util.Collection;
+
 public class GuildHandler extends Handler implements HandlerInterface {
 
     private boolean debug = true;
@@ -47,5 +49,13 @@ public class GuildHandler extends Handler implements HandlerInterface {
 
         client.preLogin.addServerJoinListener(new onServerJoinListener());
 
+    }
+
+    public void setUpGuildData() {
+        for (Server server : client.api.getServers()) {
+
+            client.addGuildData(server);
+
+        }
     }
 }
