@@ -16,13 +16,13 @@ import com.github.navy.discordbot.structures.HandlerInterface;
 public class Registry {
 	
 	private Map<String, Command> commands;
-	private Map<String, HandlerInterface> handlers;
+	private Map<String, Handler> handlers;
 	
 	public Registry() {
 		
 		System.out.println("Loading command registry.");
 		commands = new HashMap<String, Command>();
-		handlers = new HashMap<String, HandlerInterface>();
+		handlers = new HashMap<String, Handler>();
 		//loadCommands();
 		
 	}
@@ -115,7 +115,7 @@ public class Registry {
 		
 	}
 	
-	public HandlerInterface getHandler(String key) {
+	public Handler getHandler(String key) {
 		return this.handlers.get(key);
 	}
 	
