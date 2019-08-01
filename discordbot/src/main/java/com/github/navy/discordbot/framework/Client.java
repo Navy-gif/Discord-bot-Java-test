@@ -1,6 +1,7 @@
 package com.github.navy.discordbot.framework;
 
 
+import com.github.navy.discordbot.framework.handlers.GuildHandler;
 import com.github.navy.discordbot.structures.GuildData;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
@@ -34,6 +35,7 @@ public class Client {
 		login();
 		client_user = this.api.getYourself();
 		registry.getHandler("command_handler").setPrefix();
+		((GuildHandler) registry.getHandler("guild_handler")).setUpGuildData();
 		
 	}
 	
