@@ -11,8 +11,6 @@ public interface HandlerInterface {
 
 	//GloballyAttachableListener getListener();
 
-	void setPrefix();
-	
 	void setUpListener();
 	
 }

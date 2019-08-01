@@ -1,7 +1,6 @@
 package com.github.navy.discordbot.structures;
 
 import org.javacord.api.entity.server.Server;
-import org.javacord.api.entity.user.User;
 
 public class GuildData {
 	

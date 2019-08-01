@@ -21,11 +21,6 @@ public class Handler implements HandlerInterface {
 
 	}
 
-	public void setPrefix() {
-		// TODO Auto-generated method stub
-
-	}
-
 	public void setUpListener() {
 		// TODO Auto-generated method stub
 
